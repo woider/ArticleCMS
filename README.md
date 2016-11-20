@@ -118,8 +118,10 @@ application                 应用目录（非部署目录）
 │  │  └─Article.php         文章模型
 │  │
 │  └─view
+│     ├─article
+│     │  └─index.html       文章展示模板
+│     │
 │     ├─index
-│     │  ├─article.html     文章展示模板
 │     │  ├─index.html       网站首页模板
 │     │  └─plates.html      栏目分类模板
 │     │

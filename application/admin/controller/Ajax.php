@@ -359,7 +359,7 @@ class Ajax extends \think\Controller
             return null;
         }
         /* 组装查询语句 */
-        $query->table('user')->page($page, 10)->order('last_login_time DESC, rank')
+        $query->table('user')->page($page, 10)->order('rank, last_login_time DESC')
             ->field(['id', 'username', 'realname', 'email', 'rank', 'status', 'last_login_ip', 'last_login_time',]);
         if (!empty($username)) {
             $query->where([

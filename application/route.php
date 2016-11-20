@@ -44,5 +44,5 @@ Route::rule('guokr', 'index/Index/plates?plate=guokr');
 Route::rule('zhihu', 'index/Index/plates?plate=zhihu');
 Route::rule('douban', 'index/Index/plates?plate=douban');
 Route::rule('loading/:page/[:belong]', 'index/Index/loadingList');
-Route::rule('commend/:id', 'index/Index/getCommend');
-Route::rule('article/:id', 'index/Index/article');
+Route::rule('commend/:id', 'index/Article/getCommend');
+Route::rule('article/:id', 'index/Article/index');

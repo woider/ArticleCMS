@@ -58,12 +58,11 @@ $(function () {
             dataType: 'json',
             success: function (result) {
                 var json = JSON.parse(result);
-                // console.log(json);
                 for (i in json) {
                     var $item = $(".article-list li").eq(0).clone();
-                    $item.children("div.col-md-4").children("a").attr("href", "/preview/" + json[i].id);
+                    $item.children("div.col-md-4").children("a").attr("href", "/article/" + json[i].id);
                     $item.children("div.col-md-4").children("a").children("img").attr("src", json[i].image);
-                    $item.children("div.col-md-8").children("h4").children("a").attr("href", "/preview/" + json[i].id).text(json[i].title);
+                    $item.children("div.col-md-8").children("h4").children("a").attr("href", "/article/" + json[i].id).text(json[i].title);
                     $item.children("div.col-md-8").children("p.abstract").text(json[i].abstract);
                     var $info = $item.children("div.col-md-8").children("div.article-info");
                     $info.children("strong").text(json[i].author);

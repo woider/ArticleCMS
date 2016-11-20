@@ -4,6 +4,10 @@ namespace app\index\controller;
 
 class Index extends \think\Controller
 {
+    /**
+     * 网站主页
+     * @return mixed
+     */
     public function index()
     {
         $model = \think\Loader::model('Article');
@@ -16,6 +20,11 @@ class Index extends \think\Controller
         return $this->fetch();
     }
 
+    /**
+     * 栏目分类
+     * @param $plate
+     * @return mixed
+     */
     public function plates($plate)
     {
         /* 栏目分类 */
@@ -77,42 +86,4 @@ class Index extends \think\Controller
         return json_encode($json);
     }
 
-    public function getCommend($id)
-    {
-        $json = array();
-        $model = \think\Loader::model('Article');
-        /* 根据关键字查找 */
-        $keyword = $model->where(['id' => $id, 'status' => 1])->value('keyword');
-        foreach (explode('、', $keyword) as $keyword) {
-            $result = $model->searchKeyword($keyword);
-            foreach ($result as $item) {
-                if ($item['id'] != $id && !in_array($item, $json)) {
-                    array_push($json, $item);
-                }
-            }
-        }
-        //检查查找结果
-        if (count($json) > 3) {
-            return json_encode(array_slice($json, 0, 4));
-        }
-        /* 根据分类查找 */
-        $belong = $model->where(['id' => $id, 'status' => 1])->value('belong');
-        $result = $model->sortArticle($belong);
-        foreach ($result as $item) {
-            if ($item['id'] != $id && !in_array($item, $json)) {
-                array_push($json, $item);
-            }
-        }
-        //检查查找结果
-        if (count($json) > 3) {
-            return json_encode(array_slice($json, 0, 4));
-        }
-        /* 查找剩余文章 */
-        $result = $model->randomArticle($belong);
-        foreach ($result as $item) {
-            array_push($json, $item);
-        }
-        return json_encode(array_slice($json, 0, 4));
-
-    }
 }
