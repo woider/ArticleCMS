@@ -485,7 +485,7 @@ class Ajax extends \think\Controller
         $id = request()->post('id');
         $title = request()->post('title');
         $picture = request()->post('picture');
-        if (\think\Db::table('article')->where('id', $id)->value('title') != $title) return false;
+        if (\think\Db::table('article')->where(['id' => $id, 'status' => 1])->value('title') != $title) return false;
         $result = \think\Db::table('exhibit')->insert([
             'article_id' => $id,
             'picture' => $picture,
