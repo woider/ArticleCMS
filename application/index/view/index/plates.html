@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>零度文摘</title>
+    <link rel="stylesheet" type="text/css" href="/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+    <script src="/dist/lib/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/script.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body id="web-top">
+<!--导航栏-->
+<nav class="navbar navbar-inverse" style="border-radius: 0px;">
+    <div class="container">
+        <div class="row">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#zero-navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">零度文摘</a>
+            </div>
+            <div class="collapse navbar-collapse" id="zero-navbar">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    {if condition="$belong eq 1"}<li class="active">{else /}<li>{/if}
+                        <a href="/guokr">果壳</a>
+                    </li>
+                    {if condition="$belong eq 2"}<li class="active">{else /}<li>{/if}
+                        <a href="/zhihu">知乎</a>
+                    </li>
+                    {if condition="$belong eq 3"}<li class="active">{else /}<li>{/if}
+                        <a href="/douban">豆瓣</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-sm-8">
+
+            <div class="page-header" style="text-align: center;margin: 0px;">
+                <h3 style="margin: 10px 0px 4px 0px;">
+                    {if condition="$belong eq 1"}果壳 科技有意思{/if}
+                    {if condition="$belong eq 2"}知乎 与世界分享你的知识{/if}
+                    {if condition="$belong eq 3"}豆瓣 我们的精神角落{/if}
+                </h3>
+                <small style="color: #777;;">
+                    {if condition="$belong eq 1"}guokr.com{/if}
+                    {if condition="$belong eq 2"}zhihu.com{/if}
+                    {if condition="$belong eq 3"}douban.com{/if}
+                </small>
+            </div>
+            <!--文章列表-->
+            {include file="../application/index/view/module/article_list.html" /}
+        </div>
+        <div class="col-md-4 col-sm-4 hidden-xs">
+            {include file="../application/index/view/module/ranking.html" /}
+
+            <a href="#web-top" class="btn btn-default hidden-xs" id="return-top">
+                <i class="glyphicon glyphicon-arrow-up"></i>&nbsp;返回顶部
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

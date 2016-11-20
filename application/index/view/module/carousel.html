@@ -1,0 +1,32 @@
+<div class="carousel slide" data-ride="carousel" id="article-carousel">
+    <ol class="carousel-indicators">
+        {foreach $exhibits as $exhibit}
+        <li data-target="#article-carousel"></li>
+        {/foreach}
+    </ol>
+    <div class="carousel-inner">
+        {foreach $exhibits as $exhibit}
+        <div class="item">
+            <a href="/article/{$exhibit['id']}" target="_blank"><img src="{$exhibit['picture']}"/></a>
+            <div class="carousel-caption">
+                <h3>{$exhibit['title']}</h3>
+                <p class="hidden-sm hidden-xs">{$exhibit['abstract']}</p>
+            </div>
+        </div>
+        {/foreach}
+    </div>
+    <a class="left carousel-control" href="#article-carousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#article-carousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+<script>
+    var $carousel = $("#article-carousel");
+    $carousel.children(".carousel-indicators").children("li").each(function (index) {
+        $(this).attr("data-slide-to", index);
+    });
+    $carousel.children(".carousel-indicators").children("li").eq(0).addClass("active");
+    $carousel.children(".carousel-inner").children(".item").eq(0).addClass("active");
+</script>

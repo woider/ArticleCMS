@@ -1,0 +1,52 @@
+* {
+    font-family: "microsoft yahei";
+}
+
+a {
+    outline: none !important;
+}
+
+.navbar {
+    border-radius: 0px;
+}
+
+.nav-stacked li {
+    margin-bottom: 10px;
+}
+
+form textarea {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.panel .panel-heading {
+    border: none;
+    background: none;
+    padding: 15px 15px 0px 15px;
+}
+
+.panel .panel-footer {
+    border: none;
+    background: none;
+    padding: 0px 15px 15px 15px;
+    text-align: center;
+}
+
+.pagination {
+    margin: 0px;
+}
+
+.panel-footer {
+    overflow: hidden;
+}
+
+.modal-footer .alert,
+.panel-footer .alert {
+    margin: 0px;
+    padding: 6px 12px;
+}
+
+.panel-footer button {
+    padding-left: 30px;
+    padding-right: 30px;
+}

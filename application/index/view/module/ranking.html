@@ -1,0 +1,23 @@
+<div class="page-header" style="text-align: center;margin: 0px;">
+    <h3 style="margin: 10px 0px 4px 0px;">文章排行</h3>
+    <small style="color: #777;;">TOP ARTICLES</small>
+</div>
+<ol class="article-ranking">
+    {foreach $rankings as $ranking}
+    <li>
+        <a href="/article/{$ranking['id']}">{$ranking['title']}</a>
+        <p class="hidden-sm hidden">
+            {php}
+            if (mb_strlen($ranking['abstract']) > 64) {
+            echo mb_substr($ranking['abstract'], 0, 64) . '...';
+            } else {
+            echo $ranking['abstract'];
+            }
+            {/php}
+        </p>
+    </li>
+    {/foreach}
+</ol>
+<script>
+    $(".article-ranking li:lt(3)").children("p").removeClass("hidden");
+</script>

@@ -1,0 +1,50 @@
+<div class="panel panel-default cms-panel-logon hidden">
+    <div class="panel-body">
+        <form>
+            <div class="form-group has-feedback">
+                <label for="newuser-username">用户名</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
+                    <input class="form-control" type="text" id="newuser-username" data-regex="^\w{4,12}$"
+                           autocomplete="off"/>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label for="newuser-password">密码</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></div>
+                    <input class="form-control" type="text" id="newuser-password"
+                           data-regex="^[0-9a-zA-Z!@#$%^&*()]{4,16}$" autocomplete="off"/>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label for="newuser-realname">真实姓名</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></div>
+                    <input class="form-control" type="text" id="newuser-realname" data-regex="^.{2,8}$"
+                           autocomplete="off"/>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label for="newuser-email">邮箱</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></div>
+                    <input class="form-control" type="text" id="newuser-email"
+                           data-regex="^\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}$"
+                           autocomplete="off"/>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="panel-footer">
+        <div class="alert pull-left"></div>
+        <div class="pull-right">
+            <button type="button" class="btn btn-default" id="reset-form-btn">重置表单</button>
+            <button type="button" class="btn btn-primary" id="create-user-btn" >创建用户</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>零度文摘-后台管理</title>
+    <link rel="stylesheet" type="text/css" href="/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/admin.css"/>
+    <script src="/dist/lib/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/ajax.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<!--导航栏-->
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#cms-navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">零度 CMS</a>
+        </div>
+        <div class="collapse navbar-collapse" id="cms-navbar">
+            <p class="navbar-text">
+                {switch name="admin['rank']"}
+                {case value="0"}Administrators{/case}
+                {case value="1"}Manager{/case}
+                {case value="2"}Censor{/case}
+                {case value="3"}Editor{/case}
+                {/switch}</p>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-user"></i>
+                        {$admin['username']}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#cms-modal-setting" data-toggle="modal">
+                                <i class="glyphicon glyphicon-cog"></i> 个人设置
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#cms-modal-modify" data-toggle="modal">
+                                <i class="glyphicon glyphicon-wrench"></i> 修改密码
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/logout">
+                                <i class="glyphicon glyphicon-off"></i> 退出登录
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--主面板-->
+<div class="container">
+    <div class="row">
+        <!--操作导航-->
+        <div class="col-md-2">
+            <ul class="cms-nav nav nav-pills nav-stacked">
+                {switch name="admin['rank']"}
+                {case value="0" break="0"}
+                <li>
+                    <a href="javascript:void(0)"><i class="glyphicon glyphicon-star"></i>&nbsp;主页推荐</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="glyphicon glyphicon-plus"></i>&nbsp;账号创建</a>
+                </li>
+                {/case}
+                {case value="1" break="0"}
+                <li>
+                    <a href="javascript:void(0)"><i class=" glyphicon glyphicon-user"></i>&nbsp;用户管理</a>
+                </li>
+                {/case}
+                {case value="2" break="0"}
+                <li>
+                    <a href="javascript:void(0)"><i class="glyphicon glyphicon-check"></i>&nbsp;文章审核</a>
+                </li>
+                {/case}
+                {case value="3" break="0"}
+                <li>
+                    <a href="javascript:void(0)"><i class=" glyphicon glyphicon-list"></i>&nbsp;文章列表</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="glyphicon glyphicon-pencil"></i>&nbsp;内容编辑</a>
+                </li>
+                {/case}
+                {/switch}
+            </ul>
+        </div>
+        <!--操作面板-->
+        <div class="col-md-10 cms-panel">
+            {switch name="admin['rank']"}
+            {case value="0" break="0"}
+            <!--主页推荐-->
+            {include file="../application/admin/view/module/home.html" /}
+            <!--账号创建-->
+            {include file="../application/admin/view/module/logon.html" /}
+            {/case}
+            {case value="1" break="0"}
+            <!--用户管理-->
+            {include file="../application/admin/view/module/admin.html" /}
+            {/case}
+            {case value="2" break="0"}
+            <!--文章审核-->
+            {include file="../application/admin/view/module/check.html" /}
+            {/case}
+            {case value="3" break="0"}
+            <!--文章列表-->
+            {include file="../application/admin/view/module/list.html" /}
+            <!--内容编辑-->
+            {include file="../application/admin/view/module/edit.html" /}
+            {/case}
+            {/switch}
+        </div>
+    </div>
+</div>
+
+<!--模态框-->
+<div class="container">
+    <!--个人设置-->
+    <div class="modal fade" id="cms-modal-setting" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title"><i class="glyphicon glyphicon-magnet"></i>&nbsp;信息设置</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="realname" class="col-sm-2 control-label">姓名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="realname"
+                                       value="{$admin['realname']}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">邮箱</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="email"
+                                       value="{$admin['email']}"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="alert pull-left"></div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="update-personal-infomation-btn">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--修改密码-->
+    <div class="modal fade" id="cms-modal-modify" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title"><i class="glyphicon glyphicon-magnet"></i>&nbsp;信息设置</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">原始密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password-first" class="col-sm-2 control-label">输入密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password-first"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password-second" class="col-sm-2 control-label">确认密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password-second"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="alert pull-left"></div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="update-personal-password-btn">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

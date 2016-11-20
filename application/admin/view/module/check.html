@@ -1,0 +1,82 @@
+<div class="panel panel-default cms-panel-check hidden">
+    <div class="panel-heading">
+        <form class="form-inline">
+            <div class="form-group">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default active">
+                        <input type="radio" name="field" id="field-title" value="title" autocomplete="off"
+                               checked/>
+                        <i class="glyphicon glyphicon-header"></i>&nbsp;标题
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="field" id="field-keyword" value="keyword"
+                               autocomplete="off"/>
+                        <i class="glyphicon glyphicon-paperclip"></i>&nbsp;关键字
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="field" id="field-editor" value="editor"
+                               autocomplete="off"/>
+                        <i class="glyphicon glyphicon-user"></i>&nbsp;创建者
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" id="search-article" autocomplete="off"/>
+                <button type="button" class="btn btn-primary" id="check-search-article-btn">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="panel-body table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>文章标题</th>
+                <th>创建者</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {for start="0" end="10"}
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            {/for}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel-footer">
+        <ul class="pagination" data-page="check">
+            <li>
+                <a href="javascript:void(0)">&laquo;</a>
+            </li>
+            <li class="active">
+                <a href="javascript:void(0)">1</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)">2</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)">3</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)">4</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)">5</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+</div>

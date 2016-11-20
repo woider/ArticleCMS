@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>后台登录</title>
+    <link rel="stylesheet" type="text/css" href="/dist/css/bootstrap.min.css"/>
+    <style type="text/css">
+        * {
+            font-family: "microsoft yahei";
+        }
+
+        .panel {
+            margin-top: 30px;
+        }
+
+        .page-header {
+            margin: 10px;
+        }
+
+        .page-header button,
+        .page-header button:focus,
+        .page-header button:hover,
+        .page-header button:active,
+        .page-header button:focus:active {
+            color: #777777;
+            padding: 5px;
+            background: none;
+            border: none;
+            box-shadow: none;
+            outline: none;
+        }
+
+        .page-header button:hover {
+            color: #428bca;
+        }
+
+        label {
+            font-size: 1.2em;
+            font-weight: normal;
+        }
+    </style>
+    <script src="/dist/lib/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("button[data-toggle=popover]").popover();
+            $("#admin-login").click(function () {
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var $alert = $("#login-msg .modal-body .alert");
+                $alert.removeClass("alert-warning alert-danger");
+                if (!username) {
+                    $alert.addClass("alert-warning");
+                    $alert.text("用户名未填写");
+                    $("#login-msg").modal("show");
+                } else if (!password) {
+                    $alert.addClass("alert-warning");
+                    $alert.text("密码未填写");
+                    $("#login-msg").modal("show");
+                } else {
+                    $.ajax({
+                        url: '/login/check',
+                        type: "POST",
+                        data: {"username": username, "password": password},
+                        dataType: "json",
+                        success: function (result) {
+                            result = JSON.parse(result);
+                            if (result.success) {
+                                window.location.href = result.message;
+                            } else {
+                                $alert.addClass("alert-danger");
+                                $alert.text(result.message);
+                                $("#login-msg").modal("show");
+                            }
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header">
+                        <h2 style="margin: 0px;">零度<small>文摘</small>
+                            <button type="button" class="btn btn-lg btn-danger"
+                                    data-toggle="popover" data-trigger="focus"
+                                    data-content="账号需要向管理员申请">
+                                <i class="glyphicon glyphicon-question-sign"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <form class="form-horizontal">
+                        <div class="form-group form-group-lg">
+                            <label for="username" class="col-sm-2 control-label">用户名</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" name="username" id="username"
+                                       autocomplete="off" value="{$admin['username']|default=null}" />
+                            </div>
+                        </div>
+                        <div class="form-group form-group-lg">
+                            <label for="password" class="col-sm-2 control-label">密码</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="password" name="password" id="password"
+                                       autocomplete="off"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <input type="submit" class="btn btn-primary btn-lg btn-block" id="admin-login"
+                                       value="登录">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="modal fade" id="login-msg">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><i
+                                    class="glyphicon glyphicon-remove"></i></button>
+                            <h4><i class=" glyphicon glyphicon-exclamation-sign"></i>&nbsp;登录失败</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-warning">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-block btn-lg" data-dismiss="modal">确定
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

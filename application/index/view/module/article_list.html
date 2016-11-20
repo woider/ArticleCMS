@@ -1,0 +1,20 @@
+<ul class="article-list">
+    {foreach $articles as $article}
+    <li class="row">
+        <div class="col-md-4 hidden-sm hidden-xs">
+            <a href="/article/{$article['id']}" target="_blank">
+                <img class="img-responsive" src="{$article['image']}"/>
+            </a>
+        </div>
+        <div class="col-md-8 col-sm-12 col-xs-12">
+            <h4><a href="/article/{$article['id']}" target="_blank">{$article['title']}</a></h4>
+            <p class="abstract">{$article['abstract']}</p>
+            <div class="article-info">
+                <strong>{$article['author']}</strong>
+                <span>{$article['date']}</span>
+                <p>阅读( <i>{$article['amount']}</i> )</p>
+            </div>
+        </div>
+    </li>
+    {/foreach}
+</ul>

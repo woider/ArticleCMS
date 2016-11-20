@@ -1,0 +1,22 @@
+<div class="article">
+    <div class="article-head">
+        <h1>{$article['title']}</h1>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0">
+                <blockquote>
+                    <p>{$article['abstract']}</p>
+                    <footer>{$article['author']}<cite class="pull-right">{$article['date']}</cite></footer>
+                </blockquote>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <img class="img-responsive" src="{$article['image']}"/>
+            </div>
+        </div>
+    </div>
+    <div class="article-body">
+        {$article['content']}
+    </div>
+</div>
