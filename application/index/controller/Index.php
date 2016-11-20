@@ -51,27 +51,7 @@ class Index extends \think\Controller
     }
 
     /**
-     * 文章详细内容
-     * @param $id
-     * @return mixed|null
-     */
-    public function article($id)
-    {
-        $model = \think\Loader::model('Article');
-        $article = $model->findArticleById($id);
-        if (empty($article)) {
-            throw new \think\exception\HttpException(404);
-        }
-        //增加文章浏览次数
-        \think\Db::table('article')->where(['id' => $id, 'status' => 1])->setInc('amount');
-        $this->assign('article', $article);
-        $belong = $article['belong'];
-        $this->assign('rankings', $model->getRankings($belong));
-        return $this->fetch();
-    }
-
-    /**
-     * 异步获取文章数据
+     * 异步获取文章列表
      * @param $page
      * @param null $belong
      * @return mixed
