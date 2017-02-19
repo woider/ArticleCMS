@@ -84,7 +84,7 @@ class Ajax extends \think\Controller
             'email' => request()->post('email'),
         ];
         /* 验证身份权限 */
-        if (session('admin')['rank'] != 0) {
+        if (session('admin')['rank'] !== 0) {
             return false;
         }
         /* 验证数据合法性 */
