@@ -143,7 +143,7 @@ class Ajax extends \think\Controller
             'keyword' => request()->post('keyword'),
             'abstract' => request()->post('abstract'),
             'content' => request()->post('content'),
-            'status' => (session('admin')['rank'] == 0) ? 1 : 0,
+            'status' => (session('admin')['rank'] === 0) ? 1 : 0,
         ];
         /* 文章分类 */
         if (preg_match('/guokr/', $article['source'])) {
@@ -162,7 +162,7 @@ class Ajax extends \think\Controller
             $id = \think\Loader::model('Article')->findArticleId($article['source']);
             if (empty($id)) {
                 //创建文章
-                if (session('admin')['rank'] == 0) $article['auditor_id'] = 0;
+                if (session('admin')['rank'] === 0) $article['auditor_id'] = 0;
                 return \think\Loader::model('Article')->createArticle($article);
             }
             if (!\think\Db::table('article')->where(['editor_id' => $article['editor_id'], 'id' => $id])->value('id')) {
@@ -439,7 +439,7 @@ class Ajax extends \think\Controller
         /* 获取相关数据 */
         $page = request()->post('page');
         $query = new \think\db\Query();
-        if (session('admin')['rank'] != 0) return null;
+        if (session('admin')['rank'] !== 0) return null;
         if (empty($page) || !is_numeric($page)) return null;
         /* 组装查询语句 */
         $query->table('exhibit')->alias('e')->field(['e.id', 'a.id as a_id', 'a.belong', 'a.title', 'e.create_time', 'a.amount'])
@@ -469,7 +469,7 @@ class Ajax extends \think\Controller
      */
     public function deleteExhibitItem()
     {
-        if (session('admin')['rank'] != 0) return false;
+        if (session('admin')['rank'] !== 0) return false;
         $id = request()->post('id');
         if (empty($id) || !is_numeric($id)) return false;
         return (\think\Db::table('exhibit')->delete($id)) ? true : false;
@@ -481,7 +481,7 @@ class Ajax extends \think\Controller
      */
     public function saveExhibitData()
     {
-        if (session('admin')['rank'] != 0) return false;
+        if (session('admin')['rank'] !== 0) return false;
         $id = request()->post('id');
         $title = request()->post('title');
         $picture = request()->post('picture');
